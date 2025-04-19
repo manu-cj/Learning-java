@@ -1,0 +1,8 @@
+Il semble que vous travaillez sur une fonction appelée countingWord. Voici une description possible de ce que cette fonction pourrait faire :
+
+La fonction countingWord prend en entrée un texte ou un fichier contenant du texte, analyse son contenu et retourne le nombre total de mots présents. Elle peut également inclure des fonctionnalités supplémentaires, comme :
+
+Ignorer les espaces multiples ou les caractères spéciaux.
+Compter les occurrences de chaque mot individuellement.
+Gérer les différences entre majuscules et minuscules (par exemple, "Chat" et "chat" peuvent être considérés comme le même mot ou non, selon les besoins).
+Si vous avez besoin d'aide pour implémenter cette fonction ou pour ajouter des fonctionnalités spécifiques, n'hésitez pas à demander !
