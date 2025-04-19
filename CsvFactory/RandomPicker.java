@@ -3,20 +3,20 @@ package CsvFactory;
 import java.util.List;
 import java.util.Random;
 
-public class RandomPicker<list> {
-    List<list> elemList;
-    Random random;
+// Generic class RandomPicker to pick a random element from a list
+public class RandomPicker<T> { // Use a proper generic type parameter like T instead of <list>
+    List<T> elemList; // List of elements of type T
+    Random random; // Random instance for generating random numbers
 
-    public RandomPicker(List<list> elemList) {
+    // Constructor to initialize the list and Random instance
+    public RandomPicker(List<T> elemList) {
         this.elemList = elemList;
         this.random = new Random();
     }
 
-    public list pickRandom() {
-        int index = random.nextInt(elemList.size());
-        return elemList.get(index);
+    // Method to pick a random element from the list
+    public T pickRandom() {
+        int index = random.nextInt(elemList.size()); // Generate a random index
+        return elemList.get(index); // Return the element at the random index
     }
- 
-
-
 }

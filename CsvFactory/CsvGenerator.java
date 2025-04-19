@@ -1,14 +1,42 @@
 package CsvFactory;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.time.LocalDate;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class CsvGenerator {
-    ArrayList<String> reasons = new ArrayList<>();
+
+    private final RandomPicker<String> choiceReason;
+    private final RandomPicker<String> choiceDepartment;
 
     public CsvGenerator() {
-        reasons.add("Appointment");
-        reasons.add("Visit");
+
+        List<String> reasons = List.of("Appointment", "Visit");
+        List<String> departments = List.of("Cardiology", "Radiology", "Pediatrics", "Geriatrics", "Pulmonology");
+        // pick a random data
+        choiceReason = new RandomPicker<>(reasons);
+        choiceDepartment = new RandomPicker<>(departments);
+       
     }
-    VisitEntry visit = new VisitEntry("Manu", "cj", null, null, null);
+
+    public VisitEntry generateVisit(String firstname, String lastName) {
+        String reason = choiceReason.pickRandom(); 
+        String department = choiceDepartment.pickRandom();
+
+        // Create a random date in this year
+        LocalDate randomDate = LocalDate.ofYearDay(
+            LocalDate.now().getYear(),
+            ThreadLocalRandom.current().nextInt(1, LocalDate.now().lengthOfYear() + 1)
+        );
+        //return a new visit entry
+        return  new VisitEntry(firstname, lastName, reason, department, randomDate);
+    }
+
+
+
+
+
+
     
+   
 }

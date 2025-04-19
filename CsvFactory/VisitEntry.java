@@ -1,20 +1,21 @@
 package CsvFactory;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class VisitEntry {
     String firstName;
     String lastName;
     String reason;
     String department;
-    Date date;
+    LocalDate date;
 
     public VisitEntry(
         String firstName,
         String lastName, 
         String reason, 
         String department, 
-        Date date) {
+        LocalDate date) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.reason = reason;
@@ -54,11 +55,11 @@ public class VisitEntry {
         this.department = department;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
