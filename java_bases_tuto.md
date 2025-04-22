@@ -22,7 +22,7 @@
 17. [🧱 Design Patterns (aperçu)](#17-🧱-design-patterns-aperçu)  
 18. [📡 Programmation réseau (Sockets)](#18-📡-programmation-réseau-sockets)  
 19. [✅ Tests unitaires avec JUnit](#19-✅-tests-unitaires-avec-junit)
-
+20. [🏗️ Architecture](#20-🏗️-architecture)
 
 
 
@@ -108,7 +108,6 @@ for (int note : notes) {
 ```
 
 ## 5. 🧱 Classes, objets et constructeurs
-
 ```java
 public class Personne {
     String nom;
@@ -117,7 +116,28 @@ public class Personne {
     public Personne(String nom, int age) { 
         this.nom = nom;        
         this.age = age;    
-     }}
+    }
+
+    // Getter pour nom
+    public String getNom() {
+        return nom;
+    }
+
+    // Setter pour nom
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    // Getter pour age
+    public int getAge() {
+        return age;
+    }
+
+    // Setter pour age
+    public void setAge(int age) {
+        this.age = age;
+    }
+}
 ```
 
 ```java
@@ -459,7 +479,7 @@ Ces concepts avancés sont particulièrement utiles dans les scénarios suivants
 - 🔹 Streams : Traitement de grandes collections, analyses de données
 - 🔹 Optional : APIs robustes, traitement des résultats de recherche
 
-### 16. 🔄 Enums
+## 16. 🔄 Enums
 public enum Niveau {
     DEBUTANT,
     INTERMEDIAIRE,
@@ -469,7 +489,7 @@ public enum Niveau {
 Niveau monNiveau = Niveau.INTERMEDIAIRE;
 System.out.println(monNiveau); // INTERMEDIAIRE
 
-### 17. 🧱 Design Patterns (aperçu)
+## 17. 🧱 Design Patterns (aperçu)
 
 ### Design Patterns (aperçu)
 
@@ -569,7 +589,7 @@ sujet.notifier(); // "Notification reçue !"
 
 Ces patterns sont des solutions éprouvées pour résoudre des problèmes courants en conception logicielle. Ils améliorent la maintenabilité, la réutilisabilité et la clarté du code.
 
-### 18. 📡 Programmation réseau (Sockets)
+## 18. 📡 Programmation réseau (Sockets)
 
 ```
 import java.net.Socket;
@@ -580,7 +600,7 @@ PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 out.println("Hello serveur !");
 ```
 
-### 19. ✅ Tests unitaires avec JUnit
+## 19. ✅ Tests unitaires avec JUnit
 
 ```
 import static org.junit.jupiter.api.Assertions.*;
@@ -592,4 +612,36 @@ public class MathUtilTest {
         assertEquals(10, MathUtil.doubler(5));
     }
 }
+```
+
+## 20. 🏗️ Architecture
+
+```
+java_week_1/
+│
+└── Challenge10/                            ← Dossier principal de ton challenge
+    ├── Main.java                           ← Point d'entrée du programme, exécute la logique principale
+    │
+    ├── models/                             ← Contient les classes représentant les objets métiers
+    │   ├── Vehicle.java                    ← Classe de base représentant un véhicule
+    │   ├── Car.java                        ← Classe représentant une voiture, hérite de Vehicle
+    │   └── Truck.java                      ← Classe représentant un camion, hérite de Vehicle
+    │
+    ├── services/                           ← Contient des services ou de la logique métier
+    │   └── VehicleService.java             ← Service pour gérer la logique des véhicules (ex : gestion de la flotte)
+    │
+    ├── utils/                              ← Contient des classes utilitaires ou des méthodes de soutien
+    │   └── Printer.java                    ← Classe utilitaire pour afficher les informations des véhicules
+    │
+    ├── exceptions/                         ← Contient les classes d'exceptions spécifiques à ton application
+    │   └── VehicleNotFoundException.java   ← Exception levée lorsque l'on ne trouve pas un véhicule
+    │
+    ├── config/                             ← Contient des configurations spécifiques de ton projet
+    │   └── DatabaseConfig.java             ← Configuration de la connexion à la base de données
+    │
+    ├── tests/                              ← Contient les tests unitaires ou d'intégration de ton application
+    │   └── VehicleTest.java                ← Test unitaire pour la classe Vehicle (par exemple vérifier le nombre de roues)
+    │
+    └── resources/                          ← Contient les fichiers de ressources (fichiers externes, configurations)
+        └── application.properties         ← Fichier de configuration (ex : pour les variables de connexion)
 ```
