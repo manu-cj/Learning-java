@@ -3,25 +3,28 @@
 # 🚀 TUTO COMPLET – LES FONDAMENTAUX DE JAVA
 # 📚 Sommaire
 
-1. [⚙️ Syntaxe de base](#1-️-syntaxe-de-base)  
-2. [🧮 Variables et types](#2--variables-et-types)  
-3. [🔁 Conditions et boucles](#3-conditions-et-boucles)  
-4. [📦 Tableaux (arrays)](#4-tableaux-arrays)  
-5. [🧱 Classes, objets et constructeurs](#5-classes-objets-et-constructeurs)  
-6. [🔄 Méthodes](#6-méthodes)  
-7. [🧬 Héritage](#7-héritage)  
-8. [🧩 Interface](#8-interface)  
-9. [🛠️ Modificateurs d’accès](#9-modificateurs-daccès)  
-10. [📚 Packages & Imports](#10-packages--imports)  
-11. [🧰 Collections](#11-collections)  
-12. [🧨 Exceptions](#12-exceptions)  
-13. [🧼 Bonnes pratiques](#13-bonnes-pratiques)  
-14. [📖 Scanner et Fichiers](#14-scanner-et-fichiers)  
-15. [🌟 Programmation avancée en détail](#15-programmation-avancée-en-détail)  
+1. [⚙️ Syntaxe de base](#1-⚙️-syntaxe-de-base)  
+2. [🧮 Variables et types](#2-🧮-variables-et-types)  
+3. [🔁 Conditions et boucles](#3-🔁-conditions-et-boucles)  
+4. [📦 Tableaux (arrays)](#4-📦-tableaux-arrays)  
+5. [🧱 Classes, objets et constructeurs](#5-🧱-classes-objets-et-constructeurs)  
+6. [🔄 Méthodes](#6-🔄-méthodes)  
+7. [🧬 Héritage](#7-🧬-héritage)  
+8. [🧹 Interface](#8🧹--interface)  
+9. [🛠️ Modificateurs d’accès](#9-🛠️-modificateurs-daccès)  
+10. [📚 Packages & Imports](#10-📚-packages--imports)  
+11. [🧠 Collections](#11-🧠-collections)  
+12. [🢨 Exceptions](#12-🢨-exceptions)  
+13. [🧼 Bonnes pratiques](#13-🧼-bonnes-pratiques)  
+14. [📖 Scanner et Fichiers](#14-📖-scanner-et-fichiers)  
+15. [🌟 Programmation avancée en détail](#15-🌟-programmation-avancée-en-détail)  
 16. [🔄 Enums](#16-🔄-enums)  
 17. [🧱 Design Patterns (aperçu)](#17-🧱-design-patterns-aperçu)  
 18. [📡 Programmation réseau (Sockets)](#18-📡-programmation-réseau-sockets)  
-19. [✅ Tests unitaires avec JUnit](#19-✅-tests-unitaires-avec-junit)  
+19. [✅ Tests unitaires avec JUnit](#19-✅-tests-unitaires-avec-junit)
+
+
+
 
 
 
