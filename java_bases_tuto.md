@@ -17,7 +17,12 @@
 12. [🧨 Exceptions](#12-exceptions)  
 13. [🧼 Bonnes pratiques](#13-bonnes-pratiques)  
 14. [📖 Scanner et Fichiers](#14-scanner-et-fichiers)  
-15. [🌟 Programmation avancée en détail](#15-programmation-avancée-en-détail)
+15. [🌟 Programmation avancée en détail](#15-programmation-avancée-en-détail)  
+16. [🔄 Enums](#16-🔄-enums)  
+17. [🧱 Design Patterns (aperçu)](#17-🧱-design-patterns-aperçu)  
+18. [📡 Programmation réseau (Sockets)](#18-📡-programmation-réseau-sockets)  
+19. [✅ Tests unitaires avec JUnit](#19-✅-tests-unitaires-avec-junit)  
+
 
 
 ## 1. ⚙️ Syntaxe de base
@@ -450,3 +455,138 @@ Ces concepts avancés sont particulièrement utiles dans les scénarios suivants
 - 🔹 Lambda : Callbacks, événements, filtrage de données
 - 🔹 Streams : Traitement de grandes collections, analyses de données
 - 🔹 Optional : APIs robustes, traitement des résultats de recherche
+
+### 16. 🔄 Enums
+public enum Niveau {
+    DEBUTANT,
+    INTERMEDIAIRE,
+    AVANCE
+}
+
+Niveau monNiveau = Niveau.INTERMEDIAIRE;
+System.out.println(monNiveau); // INTERMEDIAIRE
+
+### 17. 🧱 Design Patterns (aperçu)
+
+### Design Patterns (aperçu)
+
+#### Singleton : pour une instance unique
+
+Le pattern Singleton garantit qu'une classe n'a qu'une seule instance et fournit un point d'accès global à cette instance.
+
+```java
+public class Singleton {
+    private static Singleton instance;
+
+    private Singleton() {}
+
+    public static Singleton getInstance() {
+        if (instance == null) {
+            instance = new Singleton();
+        }
+        return instance;
+    }
+}
+```
+
+#### Factory : pour créer des objets sans exposer la logique de création
+
+Le pattern Factory permet de créer des objets sans avoir à spécifier leur classe concrète.
+
+```java
+public interface Animal {
+    void parler();
+}
+
+public class Chien implements Animal {
+    public void parler() {
+        System.out.println("Wouf !");
+    }
+}
+
+public class Chat implements Animal {
+    public void parler() {
+        System.out.println("Miaou !");
+    }
+}
+
+public class AnimalFactory {
+    public static Animal getAnimal(String type) {
+        return switch (type) {
+            case "chien" -> new Chien();
+            case "chat" -> new Chat();
+            default -> null;
+        };
+    }
+}
+
+// Utilisation
+Animal animal = AnimalFactory.getAnimal("chien");
+animal.parler(); // "Wouf !"
+```
+
+#### Observer : pour réagir à des événements
+
+Le pattern Observer permet à un objet (le sujet) de notifier automatiquement ses observateurs lorsqu'un changement d'état se produit.
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class Sujet {
+    private List<Observateur> observateurs = new ArrayList<>();
+
+    public void ajouterObservateur(Observateur o) {
+        observateurs.add(o);
+    }
+
+    public void notifier() {
+        for (Observateur o : observateurs) {
+            o.mettreAJour();
+        }
+    }
+}
+
+public interface Observateur {
+    void mettreAJour();
+}
+
+public class ObservateurConcret implements Observateur {
+    public void mettreAJour() {
+        System.out.println("Notification reçue !");
+    }
+}
+
+// Utilisation
+Sujet sujet = new Sujet();
+Observateur obs = new ObservateurConcret();
+sujet.ajouterObservateur(obs);
+sujet.notifier(); // "Notification reçue !"
+```
+
+Ces patterns sont des solutions éprouvées pour résoudre des problèmes courants en conception logicielle. Ils améliorent la maintenabilité, la réutilisabilité et la clarté du code.
+
+### 18. 📡 Programmation réseau (Sockets)
+
+```
+import java.net.Socket;
+import java.io.PrintWriter;
+
+Socket socket = new Socket("localhost", 8080);
+PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+out.println("Hello serveur !");
+```
+
+### 19. ✅ Tests unitaires avec JUnit
+
+```
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+public class MathUtilTest {
+    @Test
+    public void testDoubler() {
+        assertEquals(10, MathUtil.doubler(5));
+    }
+}
+```
