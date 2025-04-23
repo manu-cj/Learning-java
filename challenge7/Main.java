@@ -1,4 +1,4 @@
-package helloClasses;
+package challenge7;
 import java.util.List;
 
 public class Main {

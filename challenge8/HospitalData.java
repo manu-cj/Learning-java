@@ -1,4 +1,4 @@
-package helloClasses2;
+package challenge8;
 
 public class HospitalData {
     String date;

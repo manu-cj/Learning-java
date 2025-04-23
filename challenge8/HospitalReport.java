@@ -1,4 +1,4 @@
-package helloClasses2;
+package challenge8;
 
 import java.io.File;
 import java.io.FileWriter;

@@ -1,4 +1,4 @@
-package helloClasses2;
+package challenge8;
 
 import java.util.HashSet;
 import java.util.List;

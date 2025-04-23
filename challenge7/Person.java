@@ -1,4 +1,4 @@
-package helloClasses;
+package challenge7;
 
 public class Person {
     String name;
