@@ -10,7 +10,7 @@
 5. [🧱 Classes, objets et constructeurs](#5-🧱-classes-objets-et-constructeurs)  
 6. [🔄 Méthodes](#6-🔄-méthodes)  
 7. [🧬 Héritage](#7-🧬-héritage)  
-8. [🧹 Interface](#8🧹--interface)  
+8. [🧩 Interface](#8-🧩-interface)  
 9. [🛠️ Modificateurs d’accès](#9-🛠️-modificateurs-daccès)  
 10. [📚 Packages & Imports](#10-📚-packages--imports)  
 11. [🧠 Collections](#11-🧠-collections)  
@@ -181,8 +181,68 @@ a.parler(); // "Wouf !"
 
 ## 8. 🧩 Interface
 
-- Interface = contrat
-- Classe = comportement
+Une **interface** en Java est un contrat qui définit un ensemble de méthodes que les classes implémentant cette interface doivent obligatoirement fournir. Contrairement à une classe, une interface ne contient pas d'implémentation concrète (jusqu'à Java 8 où des méthodes par défaut peuvent être ajoutées).
+
+### Exemple d'interface
+
+```java
+public interface Animal {
+    void parler(); // Méthode abstraite
+    void manger();
+}
+```
+
+### Implémentation d'une interface
+
+Une classe peut implémenter une ou plusieurs interfaces en utilisant le mot-clé `implements`.
+
+```java
+public class Chien implements Animal {
+    @Override
+    public void parler() {
+        System.out.println("Wouf !");
+    }
+
+    @Override
+    public void manger() {
+        System.out.println("Le chien mange.");
+    }
+}
+```
+
+### Différences entre une classe et une interface
+
+| Aspect | Classe | Interface |
+| --- | --- | --- |
+| Héritage | Une seule classe par héritage | Plusieurs interfaces peuvent être implémentées |
+| Contenu | Attributs et méthodes concrètes | Méthodes abstraites (et par défaut depuis Java 8) |
+| Utilisation | Décrit un comportement complet | Définit un contrat ou des capacités spécifiques |
+
+Les interfaces sont particulièrement utiles pour définir des comportements communs à des classes qui n'ont pas de lien hiérarchique direct. Par exemple, une interface `Volant` peut être implémentée à la fois par une classe `Avion` et une classe `Oiseau`.
+
+### Exemple pratique
+
+```java
+public interface Volant {
+    void voler();
+}
+
+public class Avion implements Volant {
+    @Override
+    public void voler() {
+        System.out.println("L'avion vole dans le ciel.");
+    }
+}
+
+public class Oiseau implements Volant {
+    @Override
+    public void voler() {
+        System.out.println("L'oiseau bat des ailes.");
+    }
+}
+```
+
+Les interfaces permettent ainsi de structurer le code et de garantir que certaines classes respectent un ensemble de règles ou de comportements.
 
 ## 9. 🛠️ Modificateurs d’accès
 
