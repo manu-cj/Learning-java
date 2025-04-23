@@ -2,7 +2,7 @@ package CsvFactory;
 import java.util.Scanner;
 
 
-public class CsvFactory {
+public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter a firstname");

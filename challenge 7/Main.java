@@ -1,7 +1,7 @@
 package helloClasses;
 import java.util.List;
 
-public class helloClasses {
+public class Main {
     public static void main(String[] args) {
         CsvReader csvReader = new CsvReader();
         String filePath = "./person.CSV";

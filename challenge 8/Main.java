@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class helloClasses2 {
+public class Main {
     public static void main(String[] args) {
         CsvReader csvReader = new CsvReader();
         String filePath = "./hospital.CSV";
