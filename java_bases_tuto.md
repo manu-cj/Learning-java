@@ -651,7 +651,7 @@ Ces patterns sont des solutions éprouvées pour résoudre des problèmes couran
 
 ## 18. 📡 Programmation réseau (Sockets)
 
-```
+```Java
 import java.net.Socket;
 import java.io.PrintWriter;
 
@@ -662,7 +662,7 @@ out.println("Hello serveur !");
 
 ## 19. ✅ Tests unitaires avec JUnit
 
-```
+```Java
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
@@ -723,7 +723,8 @@ Opération terminale : déclenche l’exécution
 
 Exemple simple :
 
-```
+
+```Java
 List<String> noms = List.of("Alice", "Bob", "Charlie");
 
 List<String> resultat = noms.stream()
@@ -755,7 +756,7 @@ System.out.println(resultat); // [CHARLIE]
 | `findFirst()` / `findAny()`                          | Trouve un élément                                    |
 
 ### 🧪 Exemple plus complet
-```
+```Java
 List<Integer> nombres = List.of(1, 2, 3, 4, 5, 6);
 
 int sommePairs = nombres.stream()
