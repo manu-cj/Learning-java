@@ -705,3 +705,102 @@ java_week_1/
     └── resources/                          ← Contient les fichiers de ressources (fichiers externes, configurations)
         └── application.properties         ← Fichier de configuration (ex : pour les variables de connexion)
 ```
+## 21. 🌀 Stream API en Java
+
+L'API Stream en Java (introduite à partir de Java 8) permet de traiter des collections de manière fonctionnelle, déclarative et souvent plus lisible. Elle est très utile pour filtrer, transformer, regrouper, compter, etc., sans écrire de boucles explicites.
+
+### 📦 Qu’est-ce qu’un Stream ?
+Un Stream est une vue d’une séquence de données (souvent des collections), sur laquelle on peut enchaîner des opérations intermédiaires (comme filter, map, sorted, etc.) et terminer par une opération terminale (comme collect, count, forEach, etc.).
+
+Un Stream ne modifie jamais la source, et il est consommé après une opération terminale.
+
+#### 🔁 Cycle de vie d’un Stream
+Création : à partir d’une collection ou d’un tableau (.stream())
+
+Opérations intermédiaires : transformations (lazy)
+
+Opération terminale : déclenche l’exécution
+
+Exemple simple :
+
+```
+List<String> noms = List.of("Alice", "Bob", "Charlie");
+
+List<String> resultat = noms.stream()
+    .filter(n -> n.startsWith("C"))
+    .map(String::toUpperCase)
+    .collect(Collectors.toList());
+
+System.out.println(resultat); // [CHARLIE]
+```
+### 🛠️ Principales opérations intermédiaires
+| Méthode                            | Description                    |
+| ---------------------------------- | ------------------------------ |
+| `filter(Predicate)`                | Filtre selon une condition     |
+| `map(Function)`                    | Transforme chaque élément      |
+| `flatMap(Function)`                | Aplati une structure imbriquée |
+| `sorted()` ou `sorted(Comparator)` | Trie les éléments              |
+| `distinct()`                       | Supprime les doublons          |
+| `limit(n)` / `skip(n)`             | Limite ou saute les n premiers |
+
+### ✅ Opérations terminales
+
+| Méthode                                              | Description                                          |
+| ---------------------------------------------------- | ---------------------------------------------------- |
+| `collect(...)`                                       | Récupère les résultats (ex: en `List`, `Set`, `Map`) |
+| `forEach(...)`                                       | Exécute une action pour chaque élément               |
+| `count()`                                            | Compte les éléments                                  |
+| `reduce(...)`                                        | Combine les éléments                                 |
+| `anyMatch(...)` / `allMatch(...)` / `noneMatch(...)` | Tests logiques                                       |
+| `findFirst()` / `findAny()`                          | Trouve un élément                                    |
+
+### 🧪 Exemple plus complet
+```
+List<Integer> nombres = List.of(1, 2, 3, 4, 5, 6);
+
+int sommePairs = nombres.stream()
+    .filter(n -> n % 2 == 0)
+    .map(n -> n * 2)
+    .reduce(0, Integer::sum);
+
+System.out.println(sommePairs); // 24 (2*2 + 4*2 + 6*2)
+```
+
+### 📂 Collectors utiles
+
+```
+List<String> noms = List.of("Alice", "Bob", "Charlie", "David");
+
+Map<Character, List<String>> parInitiale = noms.stream()
+    .collect(Collectors.groupingBy(n -> n.charAt(0)));
+
+System.out.println(parInitiale);
+// {A=[Alice], B=[Bob], C=[Charlie], D=[David]}
+```
+
+Autres collecteurs :
+
+- Collectors.toList()
+
+- Collectors.toSet()
+
+- Collectors.joining(", ")
+
+- Collectors.partitioningBy(...)
+
+- Collectors.summingInt(...)
+
+
+### ⚠️ À savoir
+- Un Stream ne peut être utilisé qu’une seule fois.
+
+- Les opérations sont paresseuses : elles ne s’exécutent qu’à l’appel d’une opération terminale.
+
+- Évitez les effets de bord dans les opérations (forEach, map...) pour rester fonctionnel.
+
+### 📚 À retenir
+- L’API Stream permet de manipuler des collections de manière fluide.
+
+- Elle favorise un code plus expressif et souvent plus performant.
+
+- Couplée à l’API des Optional ou au Pattern Matching, elle devient très puissante.
