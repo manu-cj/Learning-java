@@ -5,7 +5,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -31,13 +30,15 @@ public class App {
                     .skip(1)
                     .map( line -> line.split(","))
                     .forEach(colonnes -> {
-                        for (int i = 0; i < colonnes.length; i++) {
+                        for (int i = 0; i < colonnes.length && i < uniqueValue.size(); i++) {
                             uniqueValue.get(i).add(colonnes[i]);
                         }
                     });
+                    
+                  
 
     
-            } catch (Exception e) {
+            } catch (IOException e) {
                 System.out.println("an error is occured : " + e);
             }
 
@@ -45,7 +46,7 @@ public class App {
                 System.out.println("Colonne " + (i + 1) + " : " + uniqueValue.get(i));
             }
             
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println("an error is occured : " + e);
 
         }

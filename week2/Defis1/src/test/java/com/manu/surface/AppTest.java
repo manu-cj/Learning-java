@@ -12,7 +12,7 @@ public class AppTest {
         assertEquals(2.5, result, "La conversion de 250cm en mètres doit donner 2.5");
     }
 
-    @Test 
+    @Test
     void shouldConvertMilimeterToMeters() {
         double result = App.parseToMeter("2500mm");
         assertEquals(2.5, result, "La conversion de 2500mm en mètres doit donner 2.5");
