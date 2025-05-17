@@ -1,0 +1,2 @@
+Bonjour Manu !
+Voici une ligne écrite dans un fichier.
