@@ -6,11 +6,13 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 
 public class PersonCSVReader {
     public static void main(String[] args) {
         List<Person> people = new ArrayList<>();
+        HashMap<Integer, Person> people2 = new HashMap<>();
 
         try (BufferedReader br = Files.newBufferedReader(Paths.get("data.csv"))) {
             String line;
@@ -26,12 +28,18 @@ public class PersonCSVReader {
                 String city = parts[4];
 
                 people.add(new Person(id, name, age, email, city));
+                people2.put(id, new Person(id, name, age, email, city));
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        Person person1 = people2.get(5);
+
+        if (person1 != null) {
+            System.out.println(person1.getName());
+        }
         people.sort(Comparator.comparingInt(Person::getAge));
 
         people.stream().filter(data -> data.getId() == 1)
