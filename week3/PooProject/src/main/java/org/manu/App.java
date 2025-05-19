@@ -1,13 +1,9 @@
 package org.manu;
 
-/**
- * Hello world!
- *
- */
-public class App 
-{
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
+public class App {
+    public static void main(String[] args) {
+        Command command = Command.HELP;
+
+        System.out.println(command.execute("MONTHLY_AVERAGE"));
     }
 }
