@@ -64,8 +64,10 @@ public class Main {
         task.add(new Task("Aller dormir", haut));
 
         task.stream().sorted((t1, t2) -> Integer.compare(t2.getPriority().getValeur(), t1.getPriority().getValeur()))
-                .forEach(t -> System.out.println(t.getName()));
-
+                .forEach(t -> {
+                    System.out.println(t.getName());
+                    System.out.println(t.getPriority());
+                });
     }
 
 }

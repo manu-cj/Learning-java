@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class PersonCSVReader {
     public static void main(String[] args) {
@@ -45,10 +48,18 @@ public class PersonCSVReader {
         people.stream().filter(data -> data.getId() == 1)
                 .forEach(System.out::println);
 
-        people.stream().filter(data -> data.getEmail().equals("lucie.petit@email.com"))
-                .forEach(data -> System.out
-                        .println("\n |------------------------------------------------|\n" + data.getName()
-                                + "\n |------------------------------------------------|"));
+        HashMap<String, Object> userdata = new HashMap<>();
+
+        people.stream()
+                .filter(data -> data.getEmail().equals("lucie.petit@email.com"))
+                .forEach(data -> {
+                    userdata.put("name", data.getName());
+                    userdata.put("city", data.getCity());
+                    userdata.put("age", data.getAge());
+                    userdata.put("email", data.getEmail());
+                });
+
+        System.out.println(userdata.get("age"));
 
         for (Person p : people) {
             if (p.getuserById(3) != null) {
@@ -58,6 +69,14 @@ public class PersonCSVReader {
             if (p.getId() == 8) {
                 System.out.println("|------------------------------------------------|");
                 System.out.println(p);
+            }
+        }
+
+        Map<Integer, List<Person>> byAge = people.stream().collect(Collectors.groupingBy(Person::getAge));
+        System.out.println("Trié par age");
+        for (Map.Entry<Integer, List<Person>> entry : byAge.entrySet()) {
+            if (entry.getKey() == 28) {
+                System.out.println(entry.getValue());
             }
         }
     }
