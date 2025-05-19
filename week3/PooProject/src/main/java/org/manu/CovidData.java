@@ -9,11 +9,11 @@ public class CovidData {
     private String commodity;
     private String Transport_mode;
     private String measure;
-    private int Value;
-    private int cumulative;
+    private Long Value;
+    private Long cumulative;
 
     public CovidData(String direction, String year, String date, String weekday, String country, String commodity,
-            String transport_mode, String measure, int value, int cumulative) {
+            String transport_mode, String measure, Long value, Long cumulative) {
         this.direction = direction;
         this.year = year;
         this.date = date;
@@ -90,19 +90,19 @@ public class CovidData {
         this.measure = measure;
     }
 
-    public int getValue() {
+    public Long getValue() {
         return Value;
     }
 
-    public void setValue(int value) {
+    public void setValue(Long value) {
         this.Value = value;
     }
 
-    public int getCumulative() {
+    public Long getCumulative() {
         return cumulative;
     }
 
-    public void setCumulative(int cumulative) {
+    public void setCumulative(Long cumulative) {
         this.cumulative = cumulative;
     }
 

@@ -1,5 +1,13 @@
 package org.manu;
 
+import java.time.Year;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 public enum Command {
     HELP {
         @Override
@@ -64,8 +72,46 @@ public enum Command {
     },
     OVERVIEW {
         @Override
+        public void execute(List<CovidData> datas) {
+            Set<String> years = datas.stream()
+                    .map(CovidData::getYear)
+                    .collect(Collectors.toSet());
+
+            Set<String> countries = datas.stream()
+                    .map(CovidData::getCountry)
+                    .collect(Collectors.toSet());
+
+            Set<String> commodities = datas.stream()
+                    .map(CovidData::getCommodity)
+                    .collect(Collectors.toSet());
+
+            Set<String> transportModes = datas.stream()
+                    .map(CovidData::getTransport_mode)
+                    .collect(Collectors.toSet());
+
+            Set<String> measures = datas.stream()
+                    .map(CovidData::getMeasure)
+                    .collect(Collectors.toSet());
+
+            System.out.println("Unique Years:");
+            years.stream().sorted().forEach(System.out::println);
+
+            System.out.println("\nUnique Countries:");
+            countries.stream().sorted().forEach(System.out::println);
+
+            System.out.println("\nUnique Commodities:");
+            commodities.stream().sorted().forEach(System.out::println);
+
+            System.out.println("\nUnique Transport Modes:");
+            transportModes.stream().sorted().forEach(System.out::println);
+
+            System.out.println("\nUnique Measures:");
+            measures.stream().sorted().forEach(System.out::println);
+        }
+
+        @Override
         public String execute() {
-            return "overview: Lists all unique years, countries, commodities, transportation modes, and measures.";
+            return "overview";
         }
     };
 
@@ -74,5 +120,9 @@ public enum Command {
     // for help with parameter
     public String execute(String command) {
         return "This command does not support detailed help.";
+    }
+
+    public void execute(List<CovidData> datas) {
+
     }
 }
