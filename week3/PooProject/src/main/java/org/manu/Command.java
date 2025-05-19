@@ -4,7 +4,6 @@ import java.time.Year;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -73,40 +72,46 @@ public enum Command {
     OVERVIEW {
         @Override
         public void execute(List<CovidData> datas) {
-            Set<String> years = datas.stream()
-                    .map(CovidData::getYear)
-                    .collect(Collectors.toSet());
 
-            Set<String> countries = datas.stream()
-                    .map(CovidData::getCountry)
-                    .collect(Collectors.toSet());
+            System.out.println(
+                    "The unique values that span the data set: years, countries, commodities, transportation modes and measures.");
 
-            Set<String> commodities = datas.stream()
-                    .map(CovidData::getCommodity)
-                    .collect(Collectors.toSet());
+            System.out.println("----------------------------------------------------------------");
+            System.out.println("Years: " +
+                    datas.stream()
+                            .map(CovidData::getYear)
+                            .distinct()
+                            .sorted()
+                            .collect(Collectors.joining(", ")));
 
-            Set<String> transportModes = datas.stream()
-                    .map(CovidData::getTransport_mode)
-                    .collect(Collectors.toSet());
+            System.out.println("Countries: " +
+                    datas.stream()
+                            .map(CovidData::getCountry)
+                            .distinct()
+                            .sorted()
+                            .collect(Collectors.joining(", ")));
 
-            Set<String> measures = datas.stream()
-                    .map(CovidData::getMeasure)
-                    .collect(Collectors.toSet());
+            System.out.println("Commodities: " +
+                    datas.stream()
+                            .map(CovidData::getCommodity)
+                            .distinct()
+                            .sorted()
+                            .collect(Collectors.joining(", ")));
 
-            System.out.println("Unique Years:");
-            years.stream().sorted().forEach(System.out::println);
+            System.out.println("Transport Modes: " +
+                    datas.stream()
+                            .map(CovidData::getTransport_mode)
+                            .distinct()
+                            .sorted()
+                            .collect(Collectors.joining(", ")));
 
-            System.out.println("\nUnique Countries:");
-            countries.stream().sorted().forEach(System.out::println);
+            System.out.println("Measures: " +
+                    datas.stream()
+                            .map(CovidData::getMeasure)
+                            .distinct()
+                            .sorted()
+                            .collect(Collectors.joining(", ")));
 
-            System.out.println("\nUnique Commodities:");
-            commodities.stream().sorted().forEach(System.out::println);
-
-            System.out.println("\nUnique Transport Modes:");
-            transportModes.stream().sorted().forEach(System.out::println);
-
-            System.out.println("\nUnique Measures:");
-            measures.stream().sorted().forEach(System.out::println);
         }
 
         @Override
