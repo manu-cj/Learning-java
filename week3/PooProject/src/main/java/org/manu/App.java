@@ -24,8 +24,15 @@ public class App {
         switch (userCommand) {
             case "YEARLY_AVERAGE":
                 System.out.println("Write a year");
-                String year = scanner.nextLine();
-                System.out.println(command.execute(data, Integer.parseInt(year)));
+                String yearYearly = scanner.nextLine();
+                System.out.println(command.execute(data, Integer.parseInt(yearYearly)));
+                break;
+            case "MONTHLY_AVERAGE":
+                System.out.println("Write a year");
+                String yearMonthly = scanner.nextLine();
+                System.out.println("Enter a month in format ('01')");
+                String monthly = scanner.nextLine();
+                System.out.println(command.execute(data, Integer.parseInt(yearMonthly), Integer.parseInt(monthly)));
                 break;
             case "OVERVIEW":
                 System.out.println(command.execute(data));

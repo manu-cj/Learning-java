@@ -1,13 +1,9 @@
 package org.manu;
 
-import java.time.Year;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collector;
+
 import java.util.stream.Collectors;
 
 public enum Command {
@@ -51,7 +47,9 @@ public enum Command {
     MONTHLY_TOTAL {
         @Override
         public String execute(List<CovidData> datas, int year, int month) {
-            return "This command does not support this operation.";
+            Double monthlyTotal = CovidDataUtils.getMonthlyAverage(datas, year, month);
+
+            return String.format("%.2f", monthlyTotal);
         }
 
         public String execute() {
@@ -61,7 +59,9 @@ public enum Command {
     MONTHLY_AVERAGE {
         @Override
         public String execute(List<CovidData> datas, int year, int month) {
-            return "This command does not support this operation.";
+            Double monthlyAvg = CovidDataUtils.getMonthlyAverage(datas, year, month);
+
+            return String.format("%.2f", monthlyAvg);
         }
 
         public String execute() {
@@ -71,7 +71,17 @@ public enum Command {
     YEARLY_TOTAL {
         @Override
         public String execute(List<CovidData> datas, int year) {
-            return "This command does not support this operation.";
+            Map<Integer, Double> totalByMonth = CovidDataUtils.getYearlyTotalByMonth(datas, year);
+
+            List<String> lines = new ArrayList<>();
+            lines.add("Monthly total for " + year + ":");
+
+            CovidDataUtils.addMonthInList(totalByMonth, lines);
+
+            Double totalYear = CovidDataUtils.getYearlyTotal(totalByMonth);
+            lines.add("Total for year " + year + ": " + String.format("%.2f", totalYear));
+
+            return String.join("\n", lines);
         }
 
         public String execute() {
@@ -86,11 +96,7 @@ public enum Command {
             List<String> lines = new ArrayList<>();
             lines.add("Monthly averages for " + year + ":");
 
-            // Pour chaque mois (trié), on ajoute une ligne avec la moyenne correspondante
-            avgByMonth.keySet().stream().sorted().forEach(month -> {
-                String line = "Month " + month + ": " + String.format("%.2f", avgByMonth.get(month));
-                lines.add(line);
-            });
+            CovidDataUtils.addMonthInList(avgByMonth, lines);
 
             double avgYear = CovidDataUtils.getYearlyAverage(avgByMonth);
             lines.add("Average for year " + year + ": " + String.format("%.2f", avgYear));
@@ -106,35 +112,19 @@ public enum Command {
     OVERVIEW {
         @Override
         public String execute(List<CovidData> datas) {
-            String years = datas.stream()
-                    .map(CovidData::getYear)
-                    .distinct()
-                    .sorted()
-                    .map(String::valueOf)
+            String years = datas.stream().map(CovidData::getYear).distinct().sorted().map(String::valueOf)
                     .collect(Collectors.joining(", "));
 
-            String countries = datas.stream()
-                    .map(CovidData::getCountry)
-                    .distinct()
-                    .sorted()
+            String countries = datas.stream().map(CovidData::getCountry).distinct().sorted()
                     .collect(Collectors.joining(", "));
 
-            String commodities = datas.stream()
-                    .map(CovidData::getCommodity)
-                    .distinct()
-                    .sorted()
+            String commodities = datas.stream().map(CovidData::getCommodity).distinct().sorted()
                     .collect(Collectors.joining(", "));
 
-            String transportModes = datas.stream()
-                    .map(CovidData::getTransportMode)
-                    .distinct()
-                    .sorted()
+            String transportModes = datas.stream().map(CovidData::getTransportMode).distinct().sorted()
                     .collect(Collectors.joining(", "));
 
-            String measures = datas.stream()
-                    .map(CovidData::getMeasure)
-                    .distinct()
-                    .sorted()
+            String measures = datas.stream().map(CovidData::getMeasure).distinct().sorted()
                     .collect(Collectors.joining(", "));
 
             return """
