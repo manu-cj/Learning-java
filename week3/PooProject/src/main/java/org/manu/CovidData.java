@@ -1,109 +1,71 @@
 package org.manu;
 
-public class CovidData {
-    private String direction;
-    private String year;
-    private String date;
-    private String weekday;
-    private String country;
-    private String commodity;
-    private String Transport_mode;
-    private String measure;
-    private Long Value;
-    private Long cumulative;
+import java.time.LocalDate;
 
-    public CovidData(String direction, String year, String date, String weekday, String country, String commodity,
-            String transport_mode, String measure, Long value, Long cumulative) {
+public class CovidData {
+    private final String direction;
+    private final int year;
+    private final LocalDate date;
+    private final String weekday;
+    private final String country;
+    private final String commodity;
+    private final String transportMode;
+    private final String measure;
+    private final Long Value;
+    private final Long cumulative;
+
+    public CovidData(String direction, String year, LocalDate date, String weekday, String country, String commodity,
+            String transportMode, String measure, String value, String cumulative) {
         this.direction = direction;
-        this.year = year;
+        this.year = Integer.parseInt(year);
         this.date = date;
         this.weekday = weekday;
         this.country = country;
         this.commodity = commodity;
-        this.Transport_mode = transport_mode;
+        this.transportMode = transportMode;
         this.measure = measure;
-        this.Value = value;
-        this.cumulative = cumulative;
+        this.Value = Long.parseLong(value);
+        this.cumulative = Long.parseLong(cumulative);
     }
 
     public String getDirection() {
         return direction;
     }
 
-    public void setDirection(String direction) {
-        this.direction = direction;
-    }
-
-    public String getYear() {
+    public int getYear() {
         return year;
     }
 
-    public void setYear(String year) {
-        this.year = year;
-    }
-
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
     }
 
     public String getWeekday() {
         return weekday;
     }
 
-    public void setWeekday(String weekday) {
-        this.weekday = weekday;
-    }
-
     public String getCountry() {
         return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
     }
 
     public String getCommodity() {
         return commodity;
     }
 
-    public void setCommodity(String commodity) {
-        this.commodity = commodity;
-    }
-
-    public String getTransport_mode() {
-        return Transport_mode;
-    }
-
-    public void setTransport_mode(String transport_mode) {
-        this.Transport_mode = transport_mode;
+    public String getTransportMode() {
+        return transportMode;
     }
 
     public String getMeasure() {
         return measure;
     }
 
-    public void setMeasure(String measure) {
-        this.measure = measure;
-    }
-
     public Long getValue() {
         return Value;
     }
 
-    public void setValue(Long value) {
-        this.Value = value;
-    }
-
     public Long getCumulative() {
         return cumulative;
-    }
-
-    public void setCumulative(Long cumulative) {
-        this.cumulative = cumulative;
     }
 
     @Override
@@ -115,7 +77,7 @@ public class CovidData {
                 ", weekday='" + weekday + '\'' +
                 ", country='" + country + '\'' +
                 ", commodity='" + commodity + '\'' +
-                ", Transport_mode='" + Transport_mode + '\'' +
+                ", TransportMode='" + transportMode + '\'' +
                 ", measure='" + measure + '\'' +
                 ", Value=" + Value +
                 ", cumulative=" + cumulative +

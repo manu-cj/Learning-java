@@ -14,19 +14,22 @@ public class App {
         CsvRead csvRead = new CsvRead();
         List<CovidData> data = csvRead.readCsv();
 
-        Command command = Command.HELP;
         String result = "";
         Scanner scanner = new Scanner(System.in);
         System.out.println("Write a command");
         String userCommand = scanner.nextLine();
-        userCommand.toUpperCase();
+        userCommand = userCommand.toUpperCase();
+        Command command = Command.valueOf(userCommand);
 
-        switch (userCommand.toUpperCase()) {
-            case "MONTHLY_AVERAGE":
-                result = Command.MONTHLY_AVERAGE.execute();
+        switch (userCommand) {
+            case "YEARLY_AVERAGE":
+                System.out.println("Write a year");
+                String year = scanner.nextLine();
+                System.out.println(command.execute(data, Integer.parseInt(year)));
                 break;
             case "OVERVIEW":
-                Command.OVERVIEW.execute(data);
+                System.out.println(command.execute(data));
+
                 break;
             default:
                 break;
@@ -34,43 +37,6 @@ public class App {
 
         System.out.println(result);
         scanner.close();
-
-        // List<CovidData> covidData = new ArrayList<>();
-
-        // try (BufferedReader br =
-        // Files.newBufferedReader(Paths.get("./resource/data.csv"))) {
-        // String line;
-        // br.readLine();
-
-        // while ((line = br.readLine()) != null) {
-        // String[] parts = line.split(",");
-        // String direction = parts[0];
-        // String year = parts[1];
-        // String date = parts[2];
-        // String weekday = parts[3];
-        // String country = parts[4];
-        // String commodity = parts[5];
-        // String Transport_mode = parts[6];
-        // String measure = parts[7];
-        // int value = Integer.parseInt(parts[8]);
-        // int cumulative = Integer.parseInt(parts[9]);
-
-        // covidData.add(new CovidData(direction, year, date, weekday, country,
-        // commodity, Transport_mode, measure,
-        // value, cumulative));
-
-        // }
-
-        // } catch (IOException e) {
-        // e.printStackTrace();
-        // }
-
-        // data.stream().toList();
-
-        // for (CovidData each : data) {
-        // System.out.println(each);
-
-        // }
 
     }
 }

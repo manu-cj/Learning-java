@@ -1,10 +1,13 @@
 package org.manu;
 
 import java.time.Year;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public enum Command {
@@ -47,23 +50,54 @@ public enum Command {
     },
     MONTHLY_TOTAL {
         @Override
+        public String execute(List<CovidData> datas, int year, int month) {
+            return "This command does not support this operation.";
+        }
+
         public String execute() {
             return "monthly_total";
         }
     },
     MONTHLY_AVERAGE {
         @Override
+        public String execute(List<CovidData> datas, int year, int month) {
+            return "This command does not support this operation.";
+        }
+
         public String execute() {
             return "monthly_average";
         }
     },
     YEARLY_TOTAL {
         @Override
+        public String execute(List<CovidData> datas, int year) {
+            return "This command does not support this operation.";
+        }
+
         public String execute() {
             return "yearly_total";
         }
     },
     YEARLY_AVERAGE {
+        @Override
+        public String execute(List<CovidData> datas, int year) {
+            Map<Integer, Double> avgByMonth = CovidDataUtils.getYearlyAverageByMonth(datas, year);
+
+            List<String> lines = new ArrayList<>();
+            lines.add("Monthly averages for " + year + ":");
+
+            // Pour chaque mois (trié), on ajoute une ligne avec la moyenne correspondante
+            avgByMonth.keySet().stream().sorted().forEach(month -> {
+                String line = "Month " + month + ": " + String.format("%.2f", avgByMonth.get(month));
+                lines.add(line);
+            });
+
+            double avgYear = CovidDataUtils.getYearlyAverage(avgByMonth);
+            lines.add("Average for year " + year + ": " + String.format("%.2f", avgYear));
+
+            return String.join("\n", lines);
+        }
+
         @Override
         public String execute() {
             return "yearly_average";
@@ -71,47 +105,48 @@ public enum Command {
     },
     OVERVIEW {
         @Override
-        public void execute(List<CovidData> datas) {
+        public String execute(List<CovidData> datas) {
+            String years = datas.stream()
+                    .map(CovidData::getYear)
+                    .distinct()
+                    .sorted()
+                    .map(String::valueOf)
+                    .collect(Collectors.joining(", "));
 
-            System.out.println(
-                    "The unique values that span the data set: years, countries, commodities, transportation modes and measures.");
+            String countries = datas.stream()
+                    .map(CovidData::getCountry)
+                    .distinct()
+                    .sorted()
+                    .collect(Collectors.joining(", "));
 
-            System.out.println("----------------------------------------------------------------");
-            System.out.println("Years: " +
-                    datas.stream()
-                            .map(CovidData::getYear)
-                            .distinct()
-                            .sorted()
-                            .collect(Collectors.joining(", ")));
+            String commodities = datas.stream()
+                    .map(CovidData::getCommodity)
+                    .distinct()
+                    .sorted()
+                    .collect(Collectors.joining(", "));
 
-            System.out.println("Countries: " +
-                    datas.stream()
-                            .map(CovidData::getCountry)
-                            .distinct()
-                            .sorted()
-                            .collect(Collectors.joining(", ")));
+            String transportModes = datas.stream()
+                    .map(CovidData::getTransportMode)
+                    .distinct()
+                    .sorted()
+                    .collect(Collectors.joining(", "));
 
-            System.out.println("Commodities: " +
-                    datas.stream()
-                            .map(CovidData::getCommodity)
-                            .distinct()
-                            .sorted()
-                            .collect(Collectors.joining(", ")));
+            String measures = datas.stream()
+                    .map(CovidData::getMeasure)
+                    .distinct()
+                    .sorted()
+                    .collect(Collectors.joining(", "));
 
-            System.out.println("Transport Modes: " +
-                    datas.stream()
-                            .map(CovidData::getTransport_mode)
-                            .distinct()
-                            .sorted()
-                            .collect(Collectors.joining(", ")));
-
-            System.out.println("Measures: " +
-                    datas.stream()
-                            .map(CovidData::getMeasure)
-                            .distinct()
-                            .sorted()
-                            .collect(Collectors.joining(", ")));
-
+            return """
+                    The unique values that span the data set: years, countries, commodities, transportation modes and measures.
+                    ----------------------------------------------------------------
+                    Years: %s
+                    Countries: %s
+                    Commodities: %s
+                    Transport Modes: %s
+                    Measures: %s
+                    """
+                    .formatted(years, countries, commodities, transportModes, measures);
         }
 
         @Override
@@ -120,14 +155,28 @@ public enum Command {
         }
     };
 
+    // Méthodes abstraites
+
     public abstract String execute();
 
-    // for help with parameter
+    // Pour les commandes qui prennent un String paramètre (ex: help <command>)
     public String execute(String command) {
         return "This command does not support detailed help.";
     }
 
-    public void execute(List<CovidData> datas) {
-
+    // Pour les commandes qui prennent une liste de données
+    public String execute(List<CovidData> datas) {
+        return "This command does not support this operation.";
     }
+
+    // Pour les commandes qui prennent liste de données + int year
+    public String execute(List<CovidData> datas, int year) {
+        return "This command does not support this operation.";
+    }
+
+    // Pour les commandes qui prennent liste de données + year + month
+    public String execute(List<CovidData> datas, int year, int month) {
+        return "This command does not support this operation.";
+    }
+
 }
