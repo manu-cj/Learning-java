@@ -1,4 +1,4 @@
-package org.manu;
+package org.manu.services;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,6 +8,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.manu.models.CovidData;
 
 public class CsvRead {
 

@@ -1,8 +1,10 @@
-package org.manu;
+package org.manu.services;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import org.manu.models.CovidData;
 
 public class CovidDataUtils {
 

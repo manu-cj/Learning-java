@@ -1,9 +1,12 @@
-package org.manu;
+package org.manu.Commands;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import org.manu.models.CovidData;
+import org.manu.services.CovidDataUtils;
 
 public enum Command {
     HELP {

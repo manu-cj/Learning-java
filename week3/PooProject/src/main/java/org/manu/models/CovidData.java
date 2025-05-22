@@ -1,4 +1,4 @@
-package org.manu;
+package org.manu.models;
 
 import java.time.LocalDate;
 
