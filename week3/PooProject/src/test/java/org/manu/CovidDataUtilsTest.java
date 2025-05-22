@@ -95,4 +95,74 @@ class CovidDataUtilsTest {
 
     }
 
+    @Test
+    void testGetMonthlyTotal() {
+        List<CovidData> datas = List.of(
+                new CovidData("Exports", "2020", LocalDate.of(2020, 1, 10), "Friday", "BE", "Food", "Road", "KG", "100",
+                        "1000"),
+                new CovidData("Imports", "2020", LocalDate.of(2020, 1, 20), "Monday", "BE", "Food", "Road", "KG", "200",
+                        "1200"),
+                new CovidData("Exports", "2020", LocalDate.of(2020, 2, 5), "Wednesday", "BE", "Tech", "Air", "KG",
+                        "300", "1500"),
+                new CovidData("Other", "2020", LocalDate.of(2020, 2, 10), "Thursday", "BE", "Tech", "Air", "KG", "400",
+                        "1900"),
+                new CovidData("Imports", "2021", LocalDate.of(2021, 1, 15), "Friday", "BE", "Food", "Sea", "KG", "999",
+                        "9999"));
+
+        Double result = CovidDataUtils.getMonthlyTotal(datas, 2020, 1);
+
+        assertNotNull(result);
+        assertEquals(300.0, result);
+    }
+
+    @Test
+    void testGetYearlyAverage() {
+        // Arrange
+        // crée une list<CovidData> avec les données à tester.
+        List<CovidData> datas = List.of(
+                new CovidData("Exports", "2020", LocalDate.of(2020, 1, 10), "Friday", "BE", "Food", "Road", "KG", "100",
+                        "1000"),
+                new CovidData("Imports", "2020", LocalDate.of(2020, 1, 20), "Monday", "BE", "Food", "Road", "KG", "200",
+                        "1200"),
+                new CovidData("Exports", "2020", LocalDate.of(2020, 2, 5), "Wednesday", "BE", "Tech", "Air", "KG",
+                        "300", "1500"),
+                new CovidData("Other", "2020", LocalDate.of(2020, 2, 10), "Thursday", "BE", "Tech", "Air", "KG", "400",
+                        "1900"), // doit être ignoré parce que direction == other
+                new CovidData("Imports", "2021", LocalDate.of(2021, 1, 15), "Friday", "BE", "Food", "Sea", "KG", "999",
+                        "9999") // doit être ignoré parce que year == 2021
+        );
+
+        // Act
+        Map<Integer, Double> resultData = CovidDataUtils.getYearlyTotalByMonth(datas, 2020);
+
+        Double result = CovidDataUtils.getYearlyAverage(resultData);
+        assertEquals(300.0, result);
+
+    }
+
+    @Test
+    void testGetYearlyTotal() {
+        // Arrange
+        // crée une list<CovidData> avec les données à tester.
+        List<CovidData> datas = List.of(
+                new CovidData("Exports", "2020", LocalDate.of(2020, 1, 10), "Friday", "BE", "Food", "Road", "KG", "100",
+                        "1000"),
+                new CovidData("Imports", "2020", LocalDate.of(2020, 1, 20), "Monday", "BE", "Food", "Road", "KG", "200",
+                        "1200"),
+                new CovidData("Exports", "2020", LocalDate.of(2020, 2, 5), "Wednesday", "BE", "Tech", "Air", "KG",
+                        "300", "1500"),
+                new CovidData("Other", "2020", LocalDate.of(2020, 2, 10), "Thursday", "BE", "Tech", "Air", "KG", "400",
+                        "1900"), // doit être ignoré parce que direction == other
+                new CovidData("Imports", "2021", LocalDate.of(2021, 1, 15), "Friday", "BE", "Food", "Sea", "KG", "999",
+                        "9999") // doit être ignoré parce que year == 2021
+        );
+
+        // Act
+        Map<Integer, Double> resultData = CovidDataUtils.getYearlyTotalByMonth(datas, 2020);
+
+        Double result = CovidDataUtils.getYearlyTotal(resultData);
+        assertEquals(600.0, result);
+
+    }
+
 }

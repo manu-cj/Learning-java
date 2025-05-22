@@ -99,8 +99,9 @@ public enum Command {
             lines.add("Monthly averages for " + year + ":");
 
             CovidDataUtils.addMonthInList(avgByMonth, lines);
+            Map<Integer, Double> totalAnnual = CovidDataUtils.getYearlyTotalByMonth(datas, year);
 
-            double avgYear = CovidDataUtils.getYearlyAverage(avgByMonth);
+            double avgYear = CovidDataUtils.getYearlyAverage(totalAnnual);
             lines.add("Average for year " + year + ": " + String.format("%.2f", avgYear));
 
             return String.join("\n", lines);
