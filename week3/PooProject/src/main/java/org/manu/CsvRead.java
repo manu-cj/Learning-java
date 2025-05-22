@@ -35,7 +35,7 @@ public class CsvRead {
                         transportMode, measure, value, cumulative));
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Erreur lors de la lecture du fichier CSV : " + e.getMessage());
         }
         return covidData;
     }

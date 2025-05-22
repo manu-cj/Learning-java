@@ -1,10 +1,5 @@
 package org.manu;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -14,36 +9,64 @@ public class App {
         CsvRead csvRead = new CsvRead();
         List<CovidData> data = csvRead.readCsv();
 
-        String result = "";
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Write a command");
-        String userCommand = scanner.nextLine();
-        userCommand = userCommand.toUpperCase();
-        Command command = Command.valueOf(userCommand);
+        String result;
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.println("Write a command :");
+            String inputLine = scanner.nextLine().trim().toUpperCase();
+            String[] words = inputLine.split(" ");
 
-        switch (userCommand) {
-            case "YEARLY_AVERAGE":
-                System.out.println("Write a year");
-                String yearYearly = scanner.nextLine();
-                System.out.println(command.execute(data, Integer.parseInt(yearYearly)));
-                break;
-            case "MONTHLY_AVERAGE":
-                System.out.println("Write a year");
-                String yearMonthly = scanner.nextLine();
-                System.out.println("Enter a month in format ('01')");
-                String monthly = scanner.nextLine();
-                System.out.println(command.execute(data, Integer.parseInt(yearMonthly), Integer.parseInt(monthly)));
-                break;
-            case "OVERVIEW":
-                System.out.println(command.execute(data));
+            if (words.length == 0 || words[0].isBlank()) {
+                System.out.println("Aucune commande entrée.");
+                scanner.close();
+                return;
+            }
 
-                break;
-            default:
-                break;
+            String userCommand = words[0];
+
+            Command command;
+            try {
+                command = Command.valueOf(userCommand);
+            } catch (IllegalArgumentException e) {
+                System.out.println("Cette commande n'existe pas");
+                scanner.close();
+                return;
+            }
+
+            switch (command) {
+                case HELP -> {
+                    if (words.length > 1) {
+                        result = command.execute(words[1]);
+                    } else {
+                        result = command.execute();
+                    }
+                }
+
+                case OVERVIEW -> result = command.execute(data);
+                case YEARLY_AVERAGE -> {
+                    System.out.println("Entre l'année :");
+                    String year = scanner.nextLine();
+                    result = command.execute(data, Integer.parseInt(year));
+                }
+
+                case MONTHLY_AVERAGE, MONTHLY_TOTAL -> {
+                    System.out.println("Entre l'année :");
+                    String year = scanner.nextLine();
+                    System.out.println("Entre le mois dans le format ('01') :");
+                    String month = scanner.nextLine();
+                    result = command.execute(data, Integer.parseInt(year), Integer.parseInt(month));
+                }
+
+                case YEARLY_TOTAL -> {
+                    System.out.println("Entre l'année :");
+                    String year = scanner.nextLine();
+                    result = command.execute(data, Integer.parseInt(year));
+                }
+
+                default -> result = "Commande non reconnue";
+            }
+
+            System.out.println(result);
+            scanner.close();
         }
-
-        System.out.println(result);
-        scanner.close();
-
     }
 }

@@ -3,7 +3,6 @@ package org.manu;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import java.util.stream.Collectors;
 
 public enum Command {
@@ -52,6 +51,7 @@ public enum Command {
             return String.format("%.2f", monthlyTotal);
         }
 
+        @Override
         public String execute() {
             return "monthly_total";
         }
@@ -64,6 +64,7 @@ public enum Command {
             return String.format("%.2f", monthlyAvg);
         }
 
+        @Override
         public String execute() {
             return "monthly_average";
         }
@@ -84,6 +85,7 @@ public enum Command {
             return String.join("\n", lines);
         }
 
+        @Override
         public String execute() {
             return "yearly_total";
         }

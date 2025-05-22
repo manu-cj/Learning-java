@@ -27,7 +27,6 @@ public class CovidDataUtils {
                 .mapToDouble(CovidData::getValue)
                 .average()
                 .orElse(0);
-
     }
 
     // Calcule le total par mois dans une année et retourne une Map<mois, total>
