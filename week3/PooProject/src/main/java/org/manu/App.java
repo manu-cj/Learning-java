@@ -50,13 +50,13 @@ public class App {
                 case YEARLY_AVERAGE -> {
                     System.out.println("Enter the year:");
                     String year = scanner.nextLine();
-                    System.out.println("Specify the country:");
+                    System.out.println("Specify the country (All by default):");
                     String country = scanner.nextLine();
-                    System.out.println("Specify the commodity:");
+                    System.out.println("Specify the commodity (All by default):");
                     String commodity = scanner.nextLine();
-                    System.out.println("Specify the transport mode:");
+                    System.out.println("Specify the transport mode (All by default):");
                     String transportMode = scanner.nextLine();
-                    System.out.println("Specify the measure:");
+                    System.out.println("Specify the measure (All by default):");
                     String measure = scanner.nextLine();
 
                     result = command.execute(data, Integer.parseInt(year), country, commodity, transportMode, measure);
@@ -67,13 +67,13 @@ public class App {
                     String year = scanner.nextLine();
                     System.out.println("Enter the month in format ('01'):");
                     String month = scanner.nextLine();
-                    System.out.println("Specify the country:");
+                    System.out.println("Specify the country (All by default):");
                     String country = scanner.nextLine();
-                    System.out.println("Specify the commodity:");
+                    System.out.println("Specify the commodity (All by default):");
                     String commodity = scanner.nextLine();
-                    System.out.println("Specify the transport mode:");
+                    System.out.println("Specify the transport mode (All by default):");
                     String transportMode = scanner.nextLine();
-                    System.out.println("Specify the measure:");
+                    System.out.println("Specify the measure (All by default):");
                     String measure = scanner.nextLine();
                     result = command.execute(data, Integer.parseInt(year), Integer.parseInt(month), country, commodity,
                             transportMode, measure);
@@ -82,13 +82,13 @@ public class App {
                 case YEARLY_TOTAL -> {
                     System.out.println("Enter the year:");
                     String year = scanner.nextLine();
-                    System.out.println("Specify the country:");
+                    System.out.println("Specify the country (All by default):");
                     String country = scanner.nextLine();
-                    System.out.println("Specify the commodity:");
+                    System.out.println("Specify the commodity (All by default):");
                     String commodity = scanner.nextLine();
-                    System.out.println("Specify the transport mode:");
+                    System.out.println("Specify the transport mode (All by default):");
                     String transportMode = scanner.nextLine();
-                    System.out.println("Specify the measure:");
+                    System.out.println("Specify the measure (All by default):");
                     String measure = scanner.nextLine();
                     result = command.execute(data, Integer.parseInt(year), country, commodity, transportMode, measure);
                 }
