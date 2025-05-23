@@ -48,8 +48,17 @@ public enum Command {
     },
     MONTHLY_TOTAL {
         @Override
-        public String execute(List<CovidData> datas, int year, int month) {
-            Double monthlyTotal = CovidDataUtils.getMonthlyAverage(datas, year, month);
+        public String execute(List<CovidData> datas, int year, int month, String country, String commodity,
+                String transportMode,
+                String measure) {
+
+            country = CovidDataUtils.defaultIfEmpty(country, "All");
+            commodity = CovidDataUtils.defaultIfEmpty(commodity, "All");
+            transportMode = CovidDataUtils.defaultIfEmpty(transportMode, "All");
+            measure = CovidDataUtils.defaultIfEmpty(measure, "$");
+
+            Double monthlyTotal = CovidDataUtils.getMonthlyAverage(datas, year, month, country, commodity,
+                    transportMode, measure);
 
             return String.format("%.2f", monthlyTotal);
         }
@@ -61,8 +70,17 @@ public enum Command {
     },
     MONTHLY_AVERAGE {
         @Override
-        public String execute(List<CovidData> datas, int year, int month) {
-            Double monthlyAvg = CovidDataUtils.getMonthlyAverage(datas, year, month);
+        public String execute(List<CovidData> datas, int year, int month, String country, String commodity,
+                String transportMode,
+                String measure) {
+
+            country = CovidDataUtils.defaultIfEmpty(country, "All");
+            commodity = CovidDataUtils.defaultIfEmpty(commodity, "All");
+            transportMode = CovidDataUtils.defaultIfEmpty(transportMode, "All");
+            measure = CovidDataUtils.defaultIfEmpty(measure, "$");
+
+            Double monthlyAvg = CovidDataUtils.getMonthlyAverage(datas, year, month, country, commodity, transportMode,
+                    measure);
 
             return String.format("%.2f", monthlyAvg);
         }
@@ -74,8 +92,16 @@ public enum Command {
     },
     YEARLY_TOTAL {
         @Override
-        public String execute(List<CovidData> datas, int year) {
-            Map<Integer, Double> totalByMonth = CovidDataUtils.getYearlyTotalByMonth(datas, year);
+        public String execute(List<CovidData> datas, int year, String country, String commodity, String transportMode,
+                String measure) {
+
+            country = CovidDataUtils.defaultIfEmpty(country, "All");
+            commodity = CovidDataUtils.defaultIfEmpty(commodity, "All");
+            transportMode = CovidDataUtils.defaultIfEmpty(transportMode, "All");
+            measure = CovidDataUtils.defaultIfEmpty(measure, "$");
+
+            Map<Integer, Double> totalByMonth = CovidDataUtils.getYearlyTotalByMonth(datas, year, country, commodity,
+                    transportMode, measure);
 
             List<String> lines = new ArrayList<>();
             lines.add("Monthly total for " + year + ":");
@@ -95,14 +121,23 @@ public enum Command {
     },
     YEARLY_AVERAGE {
         @Override
-        public String execute(List<CovidData> datas, int year) {
-            Map<Integer, Double> avgByMonth = CovidDataUtils.getYearlyAverageByMonth(datas, year);
+        public String execute(List<CovidData> datas, int year, String country, String commodity, String transportMode,
+                String measure) {
+
+            country = CovidDataUtils.defaultIfEmpty(country, "All");
+            commodity = CovidDataUtils.defaultIfEmpty(commodity, "All");
+            transportMode = CovidDataUtils.defaultIfEmpty(transportMode, "All");
+            measure = CovidDataUtils.defaultIfEmpty(measure, "$");
+
+            Map<Integer, Double> avgByMonth = CovidDataUtils.getYearlyAverageByMonth(datas, year, country, commodity,
+                    transportMode, measure);
 
             List<String> lines = new ArrayList<>();
             lines.add("Monthly averages for " + year + ":");
 
             CovidDataUtils.addMonthInList(avgByMonth, lines);
-            Map<Integer, Double> totalAnnual = CovidDataUtils.getYearlyTotalByMonth(datas, year);
+            Map<Integer, Double> totalAnnual = CovidDataUtils.getYearlyTotalByMonth(datas, year, country, commodity,
+                    transportMode, measure);
 
             double avgYear = CovidDataUtils.getYearlyAverage(totalAnnual);
             lines.add("Average for year " + year + ": " + String.format("%.2f", avgYear));
@@ -166,12 +201,14 @@ public enum Command {
     }
 
     // Pour les commandes qui prennent liste de données + int year
-    public String execute(List<CovidData> datas, int year) {
+    public String execute(List<CovidData> datas, int year, String country, String commodity, String transportMode,
+            String measure) {
         return "This command does not support this operation.";
     }
 
     // Pour les commandes qui prennent liste de données + year + month
-    public String execute(List<CovidData> datas, int year, int month) {
+    public String execute(List<CovidData> datas, int year, int month, String country, String commodity,
+            String transportMode, String measure) {
         return "This command does not support this operation.";
     }
 

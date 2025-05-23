@@ -1,5 +1,5 @@
-/home/manu/software-dev-BeCode/Java/Learning-java/week3/PooProject/src/main/java/org/manu/CovidData.java
-/home/manu/software-dev-BeCode/Java/Learning-java/week3/PooProject/src/main/java/org/manu/CovidDataUtils.java
-/home/manu/software-dev-BeCode/Java/Learning-java/week3/PooProject/src/main/java/org/manu/CsvRead.java
+/home/manu/software-dev-BeCode/Java/Learning-java/week3/PooProject/src/main/java/org/manu/services/CsvRead.java
+/home/manu/software-dev-BeCode/Java/Learning-java/week3/PooProject/src/main/java/org/manu/Commands/Command.java
+/home/manu/software-dev-BeCode/Java/Learning-java/week3/PooProject/src/main/java/org/manu/services/CovidDataUtils.java
+/home/manu/software-dev-BeCode/Java/Learning-java/week3/PooProject/src/main/java/org/manu/models/CovidData.java
 /home/manu/software-dev-BeCode/Java/Learning-java/week3/PooProject/src/main/java/org/manu/App.java
-/home/manu/software-dev-BeCode/Java/Learning-java/week3/PooProject/src/main/java/org/manu/Command.java

@@ -15,12 +15,12 @@ public class App {
 
         String result;
         try (Scanner scanner = new Scanner(System.in)) {
-            System.out.println("Write a command :");
+            System.out.println("Enter a command:");
             String inputLine = scanner.nextLine().trim().toUpperCase();
             String[] words = inputLine.split(" ");
 
             if (words.length == 0 || words[0].isBlank()) {
-                System.out.println("Aucune commande entrée.");
+                System.out.println("No command entered.");
                 scanner.close();
                 return;
             }
@@ -31,7 +31,7 @@ public class App {
             try {
                 command = Command.valueOf(userCommand);
             } catch (IllegalArgumentException e) {
-                System.out.println("Cette commande n'existe pas");
+                System.out.println("This command does not exist");
                 scanner.close();
                 return;
             }
@@ -46,27 +46,54 @@ public class App {
                 }
 
                 case OVERVIEW -> result = command.execute(data);
+
                 case YEARLY_AVERAGE -> {
-                    System.out.println("Entre l'année :");
+                    System.out.println("Enter the year:");
                     String year = scanner.nextLine();
-                    result = command.execute(data, Integer.parseInt(year));
+                    System.out.println("Specify the country:");
+                    String country = scanner.nextLine();
+                    System.out.println("Specify the commodity:");
+                    String commodity = scanner.nextLine();
+                    System.out.println("Specify the transport mode:");
+                    String transportMode = scanner.nextLine();
+                    System.out.println("Specify the measure:");
+                    String measure = scanner.nextLine();
+
+                    result = command.execute(data, Integer.parseInt(year), country, commodity, transportMode, measure);
                 }
 
                 case MONTHLY_AVERAGE, MONTHLY_TOTAL -> {
-                    System.out.println("Entre l'année :");
+                    System.out.println("Enter the year:");
                     String year = scanner.nextLine();
-                    System.out.println("Entre le mois dans le format ('01') :");
+                    System.out.println("Enter the month in format ('01'):");
                     String month = scanner.nextLine();
-                    result = command.execute(data, Integer.parseInt(year), Integer.parseInt(month));
+                    System.out.println("Specify the country:");
+                    String country = scanner.nextLine();
+                    System.out.println("Specify the commodity:");
+                    String commodity = scanner.nextLine();
+                    System.out.println("Specify the transport mode:");
+                    String transportMode = scanner.nextLine();
+                    System.out.println("Specify the measure:");
+                    String measure = scanner.nextLine();
+                    result = command.execute(data, Integer.parseInt(year), Integer.parseInt(month), country, commodity,
+                            transportMode, measure);
                 }
 
                 case YEARLY_TOTAL -> {
-                    System.out.println("Entre l'année :");
+                    System.out.println("Enter the year:");
                     String year = scanner.nextLine();
-                    result = command.execute(data, Integer.parseInt(year));
+                    System.out.println("Specify the country:");
+                    String country = scanner.nextLine();
+                    System.out.println("Specify the commodity:");
+                    String commodity = scanner.nextLine();
+                    System.out.println("Specify the transport mode:");
+                    String transportMode = scanner.nextLine();
+                    System.out.println("Specify the measure:");
+                    String measure = scanner.nextLine();
+                    result = command.execute(data, Integer.parseInt(year), country, commodity, transportMode, measure);
                 }
 
-                default -> result = "Commande non reconnue";
+                default -> result = "Command not recognized";
             }
 
             System.out.println(result);

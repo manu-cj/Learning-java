@@ -10,32 +10,41 @@ public class CovidDataUtils {
 
     // Calcule la somme des valeurs (import + export) pour un mois donné d'une année
     // donnée
-    public static Double getMonthlyTotal(List<CovidData> datas, int year, int month) {
-        return datas.stream()
+    public static Double getMonthlyTotal(List<CovidData> datas, int year, int month, String country, String commodity,
+            String transportMode, String measure) {
+        return datas.parallelStream()
                 .filter(data -> data.getYear() == year)
                 .filter(data -> data.getDate().getMonthValue() == month)
                 .filter(data -> data.getDirection().equals("Exports") || data.getDirection().equals("Imports"))
+                .filter(data -> data.getCountry().equals(country) && data.getCommodity().equals(commodity)
+                        && data.getTransportMode().equals(transportMode) && data.getMeasure().equals(measure))
                 .mapToDouble(CovidData::getValue)
                 .sum();
     }
 
     // Calcule la moyenne des valeurs (import + export) pour un mois donné d'une
     // année donnée
-    public static Double getMonthlyAverage(List<CovidData> datas, int year, int month) {
-        return datas.stream()
+    public static Double getMonthlyAverage(List<CovidData> datas, int year, int month, String country, String commodity,
+            String transportMode, String measure) {
+        return datas.parallelStream()
                 .filter(data -> data.getYear() == year)
                 .filter(data -> data.getDate().getMonthValue() == month)
                 .filter(data -> data.getDirection().equals("Exports") || data.getDirection().equals("Imports"))
+                .filter(data -> data.getCountry().equals(country) && data.getCommodity().equals(commodity)
+                        && data.getTransportMode().equals(transportMode) && data.getMeasure().equals(measure))
                 .mapToDouble(CovidData::getValue)
                 .average()
                 .orElse(0);
     }
 
     // Calcule le total par mois dans une année et retourne une Map<mois, total>
-    public static Map<Integer, Double> getYearlyTotalByMonth(List<CovidData> datas, int year) {
-        return datas.stream()
+    public static Map<Integer, Double> getYearlyTotalByMonth(List<CovidData> datas, int year, String country,
+            String commodity, String transportMode, String measure) {
+        return datas.parallelStream()
                 .filter(data -> data.getYear() == year)
                 .filter(data -> data.getDirection().equals("Exports") || data.getDirection().equals("Imports"))
+                .filter(data -> data.getCountry().equals(country) && data.getCommodity().equals(commodity)
+                        && data.getTransportMode().equals(transportMode) && data.getMeasure().equals(measure))
                 .collect(Collectors.groupingBy(
                         data -> data.getDate().getMonthValue(),
                         Collectors.summingDouble(CovidData::getValue)));
@@ -47,10 +56,13 @@ public class CovidDataUtils {
     }
 
     // Calcule la moyenne par mois dans une année et retourne une Map<mois, moyenne>
-    public static Map<Integer, Double> getYearlyAverageByMonth(List<CovidData> datas, int year) {
-        return datas.stream()
+    public static Map<Integer, Double> getYearlyAverageByMonth(List<CovidData> datas, int year, String country,
+            String commodity, String transportMode, String measure) {
+        return datas.parallelStream()
                 .filter(data -> data.getYear() == year)
                 .filter(data -> data.getDirection().equals("Exports") || data.getDirection().equals("Imports"))
+                .filter(data -> data.getCountry().equals(country) && data.getCommodity().equals(commodity)
+                        && data.getTransportMode().equals(transportMode) && data.getMeasure().equals(measure))
                 .collect(Collectors.groupingBy(
                         data -> data.getDate().getMonthValue(),
                         Collectors.averagingDouble(CovidData::getValue)));
@@ -69,6 +81,10 @@ public class CovidDataUtils {
         });
 
         return lines;
+    }
+
+    public static String defaultIfEmpty(String value, String defaultValue) {
+        return (value == null || value.isEmpty()) ? defaultValue : value;
     }
 
 }
