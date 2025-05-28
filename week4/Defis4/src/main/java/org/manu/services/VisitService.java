@@ -47,19 +47,19 @@ public class VisitService {
         if (reports.isEmpty()) {
             System.out.println("\n--- Hospital Visit Report ---");
             System.out.println("No visits recorded yet.");
-            System.out.println("-----------------------------\n");
+            System.out.println("---------------------------\n");
         } else {
             System.out.println("\n--- Hospital Visit Report ---");
             for (VisitorReport visit : reports) {
                 System.out.println("Prénom : " + visit.getVisitor().getFirstname());
                 System.out.println("Nom de famille : " + visit.getVisitor().getLastname());
-                System.out.println("raison : " + visit.getPurpose());
+                System.out.println("Raison : " + visit.getPurpose());
                 if (visit.getDoctorName() != null) {
                     System.out.println("Nom du docteur : " + visit.getDoctorName());
                 }
                 System.out.println("timestamp : " + visit.getTimestamp());
             }
-            System.out.println("--------------------------\n");
+            System.out.println("---------------------------\n");
         }
     }
 }

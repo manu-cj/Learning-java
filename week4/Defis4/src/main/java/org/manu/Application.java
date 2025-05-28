@@ -1,5 +1,6 @@
 package org.manu;
 
+import org.manu.services.DoctorService;
 import org.manu.services.VisitService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,6 +15,7 @@ public class Application {
                  new AnnotationConfigApplicationContext("org.manu")) {
 
       VisitService hospitalService = context.getBean(VisitService.class);
+      DoctorService doctorService = context.getBean(DoctorService.class);
 
       Scanner scanner = new Scanner(System.in);
       String command;
@@ -31,12 +33,23 @@ public class Application {
             String firstName = scanner.nextLine();
             System.out.print("Entrez le nom de famille du visiteur : ");
             String lastName = scanner.nextLine();
-            System.out.print("Choisissez un médecin (Dr. Manu, Dr. Antoine) ou laissez vide pour visiter un patient : ");
+            String doctorList = doctorService.doctorList();
+            System.out.print("Choisissez un médecin " + doctorList + " ou laissez vide pour visiter un patient : ");
             String doctorChoice = scanner.nextLine();
             hospitalService.registerVisitor(firstName, lastName, doctorChoice);
             break;
           case "report":
             hospitalService.generateReport();
+            break;
+          case "add-doctor" :
+            System.out.printf("Entrez le nom du docteur : ");
+            String doctorName = scanner.nextLine();
+            System.out.println("Entrez la spècialité du docteur : ");
+            String role = scanner.nextLine();
+            doctorService.registerDoctor(doctorName, role);
+            break;
+          case "get-doctors":
+            doctorService.generateReport();
             break;
           case "exit":
             System.out.println("Fermeture de l'application. Au revoir !");
