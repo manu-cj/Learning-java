@@ -21,7 +21,7 @@ public class Application {
       String command;
 
       System.out.println("Bienvenue dans l'enregistrement des visiteurs de l'hôpital !");
-      System.out.println("Commandes disponibles : 'register', 'report', 'exit'");
+      System.out.println("Commandes disponibles : 'register', 'report', 'add-doctor', 'get-doctors', 'exit'");
 
       while (true) {
         System.out.print("Entrez une commande : ");
