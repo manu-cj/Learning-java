@@ -2,9 +2,11 @@ package org.manu.services;
 
 import org.manu.models.Doctor;
 import org.manu.repositories.DoctorRepository;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -52,6 +54,28 @@ public class DoctorService {
             allDoctors += " " + doctor.getName() + " (" + doctor.getRole() +")";
         }
         return allDoctors;
+    }
+
+
+    /**
+     * Récupère les docteurs selon le role donné en paramètre
+     * @param roleSearch
+     */
+    public void getDoctorByRole(String roleSearch) {
+        List<Doctor> doctors = doctorRepository.getAllDoctorsByRole(roleSearch);
+
+        if (doctors.isEmpty()) {
+            System.out.println("\n--- Doctor (" + roleSearch + ") List report ---");
+            System.out.println("No doctor with role: " + roleSearch);
+            System.out.println("---------------------------\n");
+        } else {
+            System.out.println("\n--- Doctor (" + roleSearch + ") List report ---");
+            for (Doctor doctor : doctors) {
+                System.out.println(doctor.getName());
+                System.out.println("Role : " + doctor.getRole());
+            }
+            System.out.println("---------------------------\n");
+        }
     }
 
 

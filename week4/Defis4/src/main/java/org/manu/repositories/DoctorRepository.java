@@ -18,4 +18,10 @@ public class DoctorRepository {
         return doctorRepository;
     }
 
+    public List<Doctor> getAllDoctorsByRole(String role) {
+        return doctorRepository.stream()
+                                .filter(d -> d.getRole().equalsIgnoreCase(role))
+                                .toList();
+    }
+
 }
