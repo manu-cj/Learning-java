@@ -75,6 +75,8 @@ public class DoctorService {
                 System.out.println("Role : " + doctor.getRole());
             }
             System.out.println("---------------------------\n");
+            System.out.println("Total doctors with role (" + roleSearch + ") : " + doctors.size());
+
         }
     }
 
