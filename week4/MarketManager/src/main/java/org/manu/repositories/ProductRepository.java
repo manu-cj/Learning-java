@@ -27,4 +27,15 @@ public class ProductRepository {
         }
         return product;
     }
+
+    /**
+     * Return all product by category
+     * @param category
+     * @return
+     */
+    public List<Product> getAllProductsByCategory(String category) {
+        return productRepository.stream()
+                .filter(p -> p.getCategory().equals(category))
+                .toList();
+    }
 }
