@@ -1,16 +1,24 @@
 package org.manu.services;
 
 import org.manu.models.Aliment;
+import org.manu.models.AlimentFactory;
 import org.manu.models.Product;
+import org.manu.models.ProductFactory;
 import org.manu.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
+@Service
 public class ProductServices {
     private final ProductRepository productRepository;
+    private final Map<String, ProductFactory> factories = Map.of(
+            "aliment", new AlimentFactory()
+    );
 
     @Autowired
     public ProductServices(ProductRepository productRepository) {
@@ -18,7 +26,7 @@ public class ProductServices {
     }
 
     /**
-     * Add a new aliment
+     * Add a new product
      * @param name
      * @param price
      * @param description
@@ -27,19 +35,12 @@ public class ProductServices {
      * @param type
      * @param date
      */
-    public void addAliment( String name, Double price, String description, String category, int stock, String type, LocalDate date) {
+    public void addProduct( String name, Double price, String description, String category, int stock, String type, LocalDate date) {
         UUID id = UUID.randomUUID();
-        Product aliment =  Aliment.builder()
-                .id(id)
-                .name(name)
-                .price(price)
-                .description(description)
-                .category(category)
-                .stock(stock)
-                .type(type)
-                .date(date)
-                .build();
-        productRepository.save(aliment);
+        ProductFactory factory = factories.get(category.toLowerCase());
+        if (factory == null) throw  new IllegalArgumentException("Category unknow : " + category);
+        Product product = factory.create(id, name, price, description, category, stock, type, date);
+        productRepository.save(product);
     }
 
     /**

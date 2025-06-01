@@ -1,10 +1,12 @@
 package org.manu.repositories;
 
 import org.manu.models.Product;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class ProductRepository {
     List<Product> productRepository = new ArrayList<>();
 
