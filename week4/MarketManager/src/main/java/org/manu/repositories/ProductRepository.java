@@ -17,17 +17,19 @@ public class ProductRepository {
      * @return
      */
     public void save(Product product) {
-        if (product.getId() == null) {
-            productRepository.add(product);
-        } else {
-            for (int i = 0; i < productRepository.size(); i++) {
-                if (productRepository.get(i).getId().equals(product.getId())) {
-                    productRepository.set(i, product);
-                    break;
-                }
+
+        boolean updated = false;
+
+        for (int i = 0; i < productRepository.size(); i++) {
+            if (productRepository.get(i).getId() != null && productRepository.get(i).getId().equals(product.getId())) {
+                productRepository.set(i, product);
+                updated = true;
+                break;
             }
         }
-        productRepository.add(product);
+        if (!updated) {
+            productRepository.add(product);
+        }
     }
 
     /**
