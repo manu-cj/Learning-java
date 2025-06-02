@@ -18,6 +18,14 @@ public class FidelityCardServices {
         this.fidelityCardRepository = fidelityCardRepository;
     }
 
+    /**
+     * Create a fidelity card
+     * @param firstname
+     * @param lastname
+     * @param birthday
+     * @param email
+     * @return
+     */
     public FidelityCard addFidelityCard(String firstname, String lastname, LocalDate birthday, String email) {
         UUID id = UUID.randomUUID();
         LocalDate createdDate = LocalDate.now();
@@ -27,6 +35,17 @@ public class FidelityCardServices {
 
         boolean created = fidelityCardRepository.createCard(fidelityCard);
 
+        if (!created) {
+            if (fidelityCardRepository.getCardById(id) != null) {
+                throw new IllegalArgumentException("One card with this id '" + id + "' already exist.");
+            }
+            if (fidelityCardRepository.getCardByEmail(email) != null) {
+                throw new IllegalArgumentException("Email '" + email + "' is already use.");
+            }
+            throw new RuntimeException("Echec occured in the created for this fidelity card.");
+        }
+
         return fidelityCard;
     }
+
 }

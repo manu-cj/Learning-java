@@ -11,6 +11,11 @@ import java.util.UUID;
 public class FidelityCardRepository {
     List<FidelityCard> fidelityCardsRepository = new ArrayList<>();
 
+    /**
+     * add a fidelity card in the list
+     * @param fidelityCard
+     * @return
+     */
     public boolean createCard(FidelityCard fidelityCard) {
         if (fidelityCard == null) {
             System.out.println("Impossible create a card with null value.");
@@ -41,12 +46,22 @@ public class FidelityCardRepository {
         return true;
     }
 
+    /**
+     * Get a fidelity card with id
+     * @param id
+     * @return
+     */
     public List<FidelityCard> getCardById(UUID id) {
         return fidelityCardsRepository.stream()
                 .filter(f -> f.getId().equals(id))
                 .toList();
     }
 
+    /**
+     * Get a fidelity card with email
+     * @param email
+     * @return
+     */
     public List<FidelityCard> getCardByEmail(String email) {
         return fidelityCardsRepository.stream()
                 .filter(f -> f.getEmail().equals(email))
