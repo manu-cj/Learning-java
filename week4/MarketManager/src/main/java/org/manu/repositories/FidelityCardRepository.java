@@ -1,10 +1,13 @@
 package org.manu.repositories;
 
 import org.manu.models.FidelityCard;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
+@Repository
 public class FidelityCardRepository {
     List<FidelityCard> fidelityCardsRepository = new ArrayList<>();
 
@@ -34,7 +37,19 @@ public class FidelityCardRepository {
         }
 
         fidelityCardsRepository.add(fidelityCard);
-        System.out.println("Fidelity card create with succes for email : " + fidelityCard.getEmail());
+        System.out.println("Fidelity card create with success for email : " + fidelityCard.getEmail());
         return true;
+    }
+
+    public List<FidelityCard> getCardById(UUID id) {
+        return fidelityCardsRepository.stream()
+                .filter(f -> f.getId().equals(id))
+                .toList();
+    }
+
+    public List<FidelityCard> getCardByEmail(String email) {
+        return fidelityCardsRepository.stream()
+                .filter(f -> f.getEmail().equals(email))
+                .toList();
     }
 }
