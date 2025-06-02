@@ -69,4 +69,29 @@ public class ProductServices {
             System.out.println("---------------------------\n");
         }
     }
+
+    public void getAllProducts() {
+        List<Product> products = productRepository.getAllProducts();
+        if (products.isEmpty()) {
+            System.out.println("\n--- product List report ---");
+            System.out.println("No product recorded yet");
+            System.out.println("---------------------------\n");
+        } else {
+            System.out.println("\n--- Products ---");
+            for (Product product : products) {
+                System.out.println("Id : " + product.getId());
+                System.out.println("Name : " + product.getName());
+                System.out.println("Price : " + product.getPrice());
+                System.out.println("Description : " + product.getDescription());
+                System.out.println("Stock : " + product.getStock());
+                if (product instanceof Aliment aliment) {
+                    System.out.println("Type : " + aliment.getType());
+                    System.out.println("En date : " + aliment.getDate());
+                }
+            }
+            System.out.println("---------------------------\n");
+
+        }
+
+    }
 }

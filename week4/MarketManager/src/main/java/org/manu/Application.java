@@ -21,12 +21,14 @@ public class Application {
 
       String command;
       List<String> categoryList = Arrays.asList("aliment");
+      String category;
 
       System.out.println("--- MARKET MANAGER ---");
       System.out.println("Commandes disponible : add-product");
 
       while (true) {
         System.out.println("Enter a command !");
+        System.out.print("> ");
         command = scanner.nextLine().trim().toLowerCase();
 
         switch (command) {
@@ -36,8 +38,22 @@ public class Application {
             for (String c : categoryList) {
               System.out.println(c);
             }
-            String category = scanner.nextLine().trim().toLowerCase();
+            System.out.print("> ");
+            category = scanner.nextLine().trim().toLowerCase();
             commandUtils.addProductCommand(category, scanner, productServices);
+            break;
+          case "get-product-by-category":
+            System.out.println("Choice a category : ");
+            System.out.println("-- Category list --");
+            for (String c : categoryList) {
+              System.out.println(c);
+            }
+            System.out.print("> ");
+            category = scanner.nextLine().trim().toLowerCase();
+            productServices.getProductsByCategory(category);
+            break;
+          case "get-products":
+            productServices.getAllProducts();
             break;
         }
 

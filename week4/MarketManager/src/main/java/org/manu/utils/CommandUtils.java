@@ -31,7 +31,7 @@ public class CommandUtils {
                 System.out.println("Write a product type : ");
                 System.out.print("> ");
                 String type = scanner.nextLine();
-                System.out.println("Write a product duration date : ");
+                System.out.println("Write a product duration date (MM/dd/yyyy) : ");
                 System.out.print("> ");
                 String date = scanner.nextLine();
 

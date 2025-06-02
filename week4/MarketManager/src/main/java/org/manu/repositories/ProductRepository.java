@@ -16,7 +16,7 @@ public class ProductRepository {
      * @param product
      * @return
      */
-    public Product save(Product product) {
+    public void save(Product product) {
         if (product.getId() == null) {
             productRepository.add(product);
         } else {
@@ -27,7 +27,7 @@ public class ProductRepository {
                 }
             }
         }
-        return product;
+        productRepository.add(product);
     }
 
     /**
@@ -39,5 +39,9 @@ public class ProductRepository {
         return productRepository.stream()
                 .filter(p -> p.getCategory().equals(category))
                 .toList();
+    }
+
+    public List<Product> getAllProducts() {
+        return productRepository;
     }
 }
