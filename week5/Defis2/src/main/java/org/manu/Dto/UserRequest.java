@@ -13,5 +13,5 @@ import lombok.NoArgsConstructor;
 @Builder
 public class UserRequest {
     @NotBlank(message = "name is required !")
-    private String name;
+    private String username;
 }

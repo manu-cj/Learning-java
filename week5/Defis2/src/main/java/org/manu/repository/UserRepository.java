@@ -20,4 +20,15 @@ public class UserRepository {
         userRepository.add(user);
         return user;
     }
+
+    public User findByUsername(String username) {
+        return userRepository.stream()
+                .filter(n -> n.getUsername().equals(username))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public List<User> findAll() {
+        return userRepository;
+    }
 }
