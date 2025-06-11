@@ -14,8 +14,26 @@ public class CovidDataMapper {
                 .commodity(dto.commodity)
                 .transportMode(dto.transportMode)
                 .measure(dto.measure)
-                .Value(dto.value)
+                .value(dto.value)
                 .cumulative(dto.cumulative)
                 .build();
     }
+
+    public static CovidDataDto toDto(CovidData entity) {
+        if (entity == null) return null;
+        return CovidDataDto.builder()
+                .direction(entity.getDirection())
+                .year(entity.getYear())
+                .date(entity.getDate())
+                .weekday(entity.getWeekday())
+                .country(entity.getCountry())
+                .commodity(entity.getCommodity())
+                .transportMode(entity.getTransportMode())
+                .measure(entity.getMeasure())
+                .value(entity.getValue())
+                .cumulative(entity.getCumulative())
+                .build();
+    }
+
+
 }

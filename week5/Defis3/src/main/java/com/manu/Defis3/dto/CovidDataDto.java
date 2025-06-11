@@ -13,6 +13,6 @@ public class CovidDataDto {
     public String commodity;
     public String transportMode;
     public String measure;
-    public Long value;
-    public Long cumulative;
+    public Double value;
+    public Double cumulative;
 }

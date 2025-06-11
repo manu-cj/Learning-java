@@ -20,7 +20,9 @@ public class CsvDataLoader {
     private CovidDataRepository covidDataRepository;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-
+    /*
+     * add all data in csv file in database
+     */
     @PostConstruct
     public void loadData() throws Exception {
         try (BufferedReader reader = new BufferedReader(
@@ -36,8 +38,8 @@ public class CsvDataLoader {
                         .commodity(fields[5])
                         .transportMode(fields[6])
                         .measure(fields[7])
-                        .value(Long.parseLong(fields[8]))
-                        .cumulative(Long.parseLong(fields[9]))
+                        .value(Double.parseDouble(fields[8]))
+                        .cumulative(Double.parseDouble(fields[9]))
                         .build();
                 CovidData data = CovidDataMapper.toEntity(dto);
                 covidDataRepository.save(data);

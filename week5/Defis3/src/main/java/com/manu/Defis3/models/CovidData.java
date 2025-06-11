@@ -30,6 +30,6 @@ public class CovidData {
     private String commodity;
     private String transportMode;
     private String measure;
-    private Long Value;
-    private Long cumulative;
+    private Double value;
+    private Double cumulative;
 }
