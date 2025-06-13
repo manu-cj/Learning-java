@@ -121,6 +121,12 @@ public class CovidDataService {
                 .sum();
     }
 
+    /**
+     * Provides an overview of the available CovidData entries.
+     * Lists all unique years, countries, commodities, transport modes, and measures present in the dataset.
+     *
+     * @return a formatted string summarizing the dataset, or a message if no data is available
+     */
     public String overview() {
         List<CovidData> dataList = covidDataRepository.findAll();
 
