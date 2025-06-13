@@ -10,55 +10,8 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class CovidDataController {
 
-    private final CovidDataRepository repository;
     private final CovidDataService covidDataService;
 
-
-    @GetMapping("/repository/monthly-total")
-    public Double getMonthlyTotalByRepository(
-            @RequestParam int year,
-            @RequestParam int month,
-            @RequestParam String country,
-            @RequestParam String commodity,
-            @RequestParam String transportMode,
-            @RequestParam String measure
-    ) {
-        return repository.sumByAllFilters(year, month, country, commodity, transportMode, measure);
-    }
-
-    @GetMapping("/repository/monthly-average")
-    public Double getMonthlyAverageByRepository(
-            @RequestParam int year,
-            @RequestParam int month,
-            @RequestParam String country,
-            @RequestParam String commodity,
-            @RequestParam String transportMode,
-            @RequestParam String measure
-    ) {
-        return repository.avgExportImportByMonthAndYear(year, month, country, commodity, transportMode, measure);
-    }
-
-    @GetMapping("/repository/yearly-total")
-    public Double getYearlyTotalByRepository(
-            @RequestParam int year,
-            @RequestParam String country,
-            @RequestParam String commodity,
-            @RequestParam String transportMode,
-            @RequestParam String measure
-    ) {
-        return repository.sumByYearWithAllFilters(year, country, commodity, transportMode, measure);
-    }
-
-    @GetMapping("/repository/yearly-average")
-    public Double getYearlyAverageByRepository(
-            @RequestParam int year,
-            @RequestParam String country,
-            @RequestParam String commodity,
-            @RequestParam String transportMode,
-            @RequestParam String measure
-    ) {
-        return repository.avgByYearWithAllFilters(year, country, commodity, transportMode, measure);
-    }
 
     @GetMapping("/monthly-total")
     public Double getMonthlyTotal(
